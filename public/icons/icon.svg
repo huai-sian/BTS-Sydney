@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="BTS Sydney app icon">
+  <rect width="512" height="512" rx="112" fill="#6d28d9"/>
+  <path fill="#ffffff" d="M126 176c0-29 23-52 52-52h156c29 0 52 23 52 52v180c0 18-14 32-32 32H158c-18 0-32-14-32-32V176Z"/>
+  <path fill="#ede9fe" d="M174 124h164v62H174z"/>
+  <path fill="#6d28d9" d="M180 235h152v28H180zm0 56h152v28H180z"/>
+  <path fill="#a78bfa" d="M256 82 279 130h-46l23-48Zm-76 326 152-152 30 30-122 122h-60Z"/>
+</svg>
