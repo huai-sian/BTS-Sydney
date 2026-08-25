@@ -13,8 +13,8 @@ set -euo pipefail
 # ──────────────────────────────────────────────────────────────────────────
 
 if [[ -t 1 ]] && command -v tput >/dev/null 2>&1 && [[ "$(tput colors 2>/dev/null || echo 0)" -ge 8 ]]; then
-  BOLD=$(tput bold); DIM=$(tput dim); RESET=$(tput sgr0)
-  BLUE=$(tput setaf 4); GREEN=$(tput setaf 2); YELLOW=$(tput setaf 3); RED=$(tput setaf 1)
+  BOLD=$(tput bold || true); DIM=$(tput dim || true); RESET=$(tput sgr0 || true)
+  BLUE=$(tput setaf 4 || true); GREEN=$(tput setaf 2 || true); YELLOW=$(tput setaf 3 || true); RED=$(tput setaf 1 || true)
 else
   BOLD=""; DIM=""; RESET=""; BLUE=""; GREEN=""; YELLOW=""; RED=""
 fi
@@ -32,7 +32,7 @@ SKIPPED=()        # things we couldn't do (e.g. gh missing)
 # output isn't a terminal, so piped logs stay readable.
 _clear() {
   [[ -t 1 ]] || return 0
-  if command -v tput >/dev/null 2>&1; then tput clear; else printf '\033[2J\033[3J\033[H'; fi
+  if command -v tput >/dev/null 2>&1; then tput clear || true; else printf '\033[2J\033[3J\033[H'; fi
 }
 
 # banner "Title" — opening frame: what this wizard does.
@@ -202,7 +202,7 @@ say "Vercel should deploy the same code that is on GitHub."
 step "Checking that this directory is a git repository."
 git rev-parse --show-toplevel >/dev/null
 step "Checking the current branch."
-CURRENT_BRANCH=$(git branch --show-current)
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 if [[ "$CURRENT_BRANCH" != "main" ]]; then
   warn "current branch is $CURRENT_BRANCH, not main"
   confirm "Continue deploying this branch anyway?" || exit 1
